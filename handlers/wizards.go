@@ -6,19 +6,15 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func Home(c *fiber.Ctx) error {
-	return c.SendString("Magic Bean App!")
-}
-
-func ListFacts(c *fiber.Ctx) error {
+func ListWizards(c *fiber.Ctx) error {
 	facts := []models.Fact{}
 	database.DB.Db.Find(&facts)
 
 	return c.Status(200).JSON(facts)
 }
 
-func CreateFact(c *fiber.Ctx) error {
-	fact := new(models.Fact)
+func CreateWizard(c *fiber.Ctx) error {
+	fact := new(models.Wizard)
 	if err := c.BodyParser(fact); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": err.Error(),
@@ -30,9 +26,9 @@ func CreateFact(c *fiber.Ctx) error {
 	return c.Status(200).JSON(fact)
 }
 
-func RemoveFact(c *fiber.Ctx) error {
+func RemoveWizard(c *fiber.Ctx) error {
 	id := c.Params("id")
-	var fact models.Fact
+	var fact models.Wizard
 
 	result := database.DB.Db.Delete(&fact, id)
 
