@@ -18,4 +18,5 @@ func setupWizardRoutes(app *fiber.App) {
 	app.Get("/list/wizards", handlers.ListWizards)
 	app.Post("/create/wizard", handlers.CreateWizard)
 	app.Delete("/remove/wizard/:id", handlers.RemoveWizard)
+	app.Patch("/damage/wizard/:id/:damage", handlers.DamageWizard)
 }
